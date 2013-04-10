@@ -1,0 +1,60 @@
+html,body {
+	margin: 0;
+	padding: 0;
+}
+
+#container {
+	width: 980px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: none;
+	margin: : 0;
+	padding: 0;
+	background-color: #e6e6fa;
+}
+
+#header {
+	width: 100%;
+	border-bottom: 1px solid black;
+	float: left;
+}
+
+#header h1 {
+	margin: 5px;
+	float: left;
+}
+
+#auth {
+	width: 50%;
+	float: right;
+	margin: 10px;
+}
+
+#auth ul li {
+	display: inline;
+}
+
+#auth ul li a {
+	margin-right: 5px;
+	border: 1px solid black;
+	padding: 5px 7px;
+	background-color: #fcdd76;
+}
+
+#menu {
+	height: 50 px;
+	width: 100%;
+	border-bottom: 1px solid black;
+	float: left;
+}
+
+#menu ul li {
+	display: inline;
+}
+
+#menu ul li a {
+	margin-right: 5px;
+	border: 1px solid black;
+	padding: 5px 7px;
+	background-color: #50c878;
+}
