@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="resources/css/main.css" rel="stylesheet" type="text/css"/>
-<title><spring:message code="page.title.home" /></title>
+<title><spring:message code="page.title.about.us" /></title>
 </head>
 <body>
 <div id="container">
@@ -19,7 +19,14 @@
 	<%@include file="menu.jsp" %>
 </div>
 <div id="content">
-<p>Добро пожаловать на домашнюю страницу проекта Your Cart. С помощью нашего сервиса Вам удастся с легкостью отслеживать интересные товары и услуги.</p>
+<p>Your Cart поможет Вам не отрываясь от ваших дел, находить необходимые Вам товары и услуги.
+Это возможно благодаря:
+<ul>
+<li>Доступности Your Cart на всех популярных устройствах</li>
+<li>Интеллектуальной системе поиска интересных Вам товаров</li>
+<li>Четкой системе внесения товаров в общую базу</li>
+</ul>
+</p>
 </div>
 <div id="footer">
 	<%@include file="footer.jsp" %>

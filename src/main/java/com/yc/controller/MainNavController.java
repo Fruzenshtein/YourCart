@@ -16,5 +16,10 @@ public class MainNavController {
 	public ModelAndView mainPageIndex() {
 		return new ModelAndView("home");
 	}
+	
+	@RequestMapping(value="/about-us")
+	public ModelAndView aboutUs() {
+		return new ModelAndView("about-us");
+	}
 
 }

@@ -13,25 +13,16 @@
 <body>
 <div id="container">
 <div id="header">
-<h1><spring:message code="page.title.home" /></h1>
-<div id="auth">
-<ul>
-<li><a href="#">Вход в систему</a></li>
-<li><a href="#">Регистрация</a></li>
-</ul>
-</div>
+	<%@include file="header.jsp" %>
 </div>
 <div id="menu">
-<ul>
-<li><a href="#">Главная страница</a></li>
-<li><a href="#">О нас</a></li>
-</ul>
+	<%@include file="menu.jsp" %>
 </div>
 <div id="content">
-Контент
+<p>Добро пожаловать на домашнюю страницу проекта Your Cart. С помощью нашего сервиса Вам удастся с легкостью отслеживать интересные товары и услуги.</p>
 </div>
 <div id="footer">
-Copyright
+	<%@include file="footer.jsp" %>
 </div>
 </div>
 
