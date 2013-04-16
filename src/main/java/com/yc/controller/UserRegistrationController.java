@@ -1,5 +1,10 @@
 package com.yc.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,16 +34,19 @@ public class UserRegistrationController {
 		ModelAndView modelAndView = new ModelAndView("user-registration/registration-form");
 		
 		User tempUser = userService.getUser(user.getEmail());
+		Map<String, String> messages = new HashMap<String, String>();
 		
 		if (tempUser == null) {
 						
 			userService.addUser(user);
 			
 			modelAndView.addObject("user", user);
-			modelAndView.addObject("success-msg", "message.user.success.register");
+			messages.put("success", "message.user.success.register");
 		} else {
-			modelAndView.addObject("error-msg", "message.user.invalid.register");
+			messages.put("error", "message.user.invalid.register");
 		}
+		
+		modelAndView.addObject("messages", messages);
 		return modelAndView;
 	}
 

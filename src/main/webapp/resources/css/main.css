@@ -69,7 +69,7 @@ html,body {
 	border-bottom: 1px solid black; 
 }
 
-#content p {
+#content p, form, h2 {
 	margin: 10px;
 }
 

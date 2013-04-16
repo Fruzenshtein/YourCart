@@ -26,14 +26,13 @@
 <div id="content">
 <h2><spring:message code="page.title.user.registration" /></h2>
 <p>
-<c:if test="${success-msg != ''}">
-	<span class="success"><spring:message code="message.user.success.register" /></span>
-</c:if>
-<c:if test="${error-msg != ''}">
-	<span class="error"><spring:message code="message.user.invalid.register" /></span>
-</c:if>
+
+	<c:forEach var="message" items="${messages}">
+		<span class="${message.key}"><spring:message code="${message.value}" /></span><br />
+	</c:forEach>
+	
 </p>
-<p>
+
 <form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/user/register.html">
 <table>
 <tbody>
@@ -52,7 +51,7 @@
 </tbody>
 </table>
 </form:form>
-</p>
+
 </div>
 <div id="footer">
 	<%@include file="../footer.jsp" %>
