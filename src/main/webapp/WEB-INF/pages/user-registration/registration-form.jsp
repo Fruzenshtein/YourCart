@@ -39,13 +39,16 @@
 	<tr>
 		<td><spring:message code="user.registration.email" /></td>
 		<td><form:input path="email" /></td>
+		<td><form:errors cssClass="error" path="email" /></td>
 	</tr>
 	<tr>
 		<td><spring:message code="user.registration.password" /></td>
 		<td><form:password path="password" /></td>
+		<td><form:errors cssClass="error" path="password" /></td>
 	</tr>
 	<tr>
 		<td><input type="submit" /></td>
+		<td></td>
 		<td></td>
 	</tr>
 </tbody>

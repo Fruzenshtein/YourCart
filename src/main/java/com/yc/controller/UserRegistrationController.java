@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,8 +33,12 @@ public class UserRegistrationController {
 	}
 	
 	@RequestMapping(value="/user/register")
-	public ModelAndView registerUser(@ModelAttribute User user) {
+	public ModelAndView registerUser(@ModelAttribute @Valid User user, 
+			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("user-registration/registration-form");
+		
+		if (result.hasErrors())
+			return modelAndView;
 		
 		User tempUser = userService.getUser(user.getEmail());
 		Map<String, String> messages = new HashMap<String, String>();
@@ -47,7 +54,9 @@ public class UserRegistrationController {
 		}
 		
 		modelAndView.addObject("messages", messages);
+		
 		return modelAndView;
+		
 	}
 
 }
