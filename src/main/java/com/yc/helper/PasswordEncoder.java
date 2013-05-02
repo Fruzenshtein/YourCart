@@ -10,26 +10,31 @@ public class PasswordEncoder {
 
 	public String getHash(String str) {
 
-		MessageDigest md5;
-		StringBuffer hexString = new StringBuffer();
+		String md5password = "";
+		MessageDigest messageDigest;
 
 		try {
+			messageDigest = MessageDigest.getInstance("MD5");
 
-			md5 = MessageDigest.getInstance("md5");
+			messageDigest.reset();
+			messageDigest.update(str.getBytes());
 
-			md5.reset();
-			md5.update(str.getBytes());
+			byte[] md5 = messageDigest.digest();
 
-			byte messageDigest[] = md5.digest();
-
-			for (int i = 0; i < messageDigest.length; i++) {
-				hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+			for (int i = 0; i < md5.length; i++) {
+				String tmp = (Integer.toHexString(0xFF & md5[i]));
+				if (tmp.length() == 1) {
+					md5password += "0" + tmp;
+				} else {
+					md5password += tmp;
+				}
 			}
 
 		} catch (NoSuchAlgorithmException e) {
-			return e.toString();
+			e.printStackTrace();
 		}
 
-		return hexString.toString();
+		return md5password;
+
 	}
 }

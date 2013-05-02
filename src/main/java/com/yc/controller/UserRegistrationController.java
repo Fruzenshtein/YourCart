@@ -1,8 +1,6 @@
 package com.yc.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -12,10 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yc.helper.PasswordEncoder;
-import com.yc.model.Role;
 import com.yc.model.User;
 import com.yc.service.UserService;
 
@@ -25,14 +22,14 @@ public class UserRegistrationController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/user/registration")
+	@RequestMapping(value="/registration", method=RequestMethod.GET)
 	public ModelAndView registrationPage() {
 		ModelAndView modelAndView = new ModelAndView("user-registration/registration-form");
 		modelAndView.addObject("user", new User());
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/user/register")
+	@RequestMapping(value="/registration", method=RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute @Valid User user, 
 			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("user-registration/registration-form");

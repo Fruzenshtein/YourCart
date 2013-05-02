@@ -1,7 +1,6 @@
 package com.yc.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,7 +26,7 @@ public class Role {
 		joinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")},
 		inverseJoinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")}
 	)
-	private List<User> userRoles = new ArrayList<User>();
+	private Set<User> userRoles;
 	
 	public Role() { };
 	
@@ -56,11 +55,11 @@ public class Role {
 		this.role = role;
 	}
 
-	public List<User> getUserRoles() {
+	public Set<User> getUserRoles() {
 		return userRoles;
 	}
 
-	public void setUserRoles(List<User> userRoles) {
+	public void setUserRoles(Set<User> userRoles) {
 		this.userRoles = userRoles;
 	}
 

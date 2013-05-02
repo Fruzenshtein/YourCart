@@ -1,12 +1,27 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <h1><spring:message code="page.title.home" /></h1>
 <div id="auth">
-<ul>
-<li><a href="#">Вход в систему</a></li>
-<li><a href="${pageContext.request.contextPath}/user/registration.html">Регистрация</a></li>
-</ul>
+
+<c:choose>
+<c:when test="${userLogin != null}">
+	<ul>
+	<li><a href="${pageContext.request.contextPath}/user/account.html">Личный кабинет</a></li>
+	</ul>
+</c:when>
+<c:otherwise>
+	<ul>
+	<li><a href="${pageContext.request.contextPath}/user-login.html">Вход в систему</a></li>
+	<li><a href="${pageContext.request.contextPath}/registration.html">Регистрация</a></li>
+	</ul>
+</c:otherwise>
+</c:choose>
+
+
 </div>

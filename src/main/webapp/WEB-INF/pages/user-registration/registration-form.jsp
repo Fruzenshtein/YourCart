@@ -12,7 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="../resources/css/main.css" rel="stylesheet" type="text/css"/>
+<link href="resources/css/main.css" rel="stylesheet" type="text/css"/>
 <title><spring:message code="page.title.user.registration" /></title>
 </head>
 <body>
@@ -33,7 +33,7 @@
 	
 </p>
 
-<form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/user/register.html">
+<form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/registration.html">
 <table>
 <tbody>
 	<tr>

@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @EnableTransactionManagement
 @ComponentScan("com.yc")
 @PropertySource("classpath:application.properties")
-@SuppressWarnings("restriction")
+@ImportResource("classpath:spring-security.xml")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 	
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";

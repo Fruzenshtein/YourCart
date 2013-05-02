@@ -13,7 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="resources/css/main.css" rel="stylesheet" type="text/css"/>
-<title><spring:message code="page.title.user.registration" /></title>
+<title><spring:message code="page.title.login" /></title>
 </head>
 <body>
 <div id="container">
@@ -24,36 +24,35 @@
 	<%@include file="../menu.jsp" %>
 </div>
 <div id="content">
-<h2><spring:message code="page.title.user.registration" /></h2>
+<h2><spring:message code="page.title.login" /></h2>
+
 <p>
 
-	<c:forEach var="message" items="${messages}">
-		<span class="${message.key}"><spring:message code="${message.value}" /></span><br />
-	</c:forEach>
-	
+
+<c:if test="${error == true}">
+	<span class="error">Не верное имя пользователя или пароль</span>
+</c:if>
+
 </p>
 
-<form:form method="POST" commandName="user" action="${pageContext.request.contextPath}/registration.html">
+<form method="post" action="<c:url value='j_spring_security_check'/>" >
 <table>
 <tbody>
-	<tr>
-		<td><spring:message code="user.registration.email" /></td>
-		<td><form:input path="email" /></td>
-		<td><form:errors cssClass="error" path="email" /></td>
-	</tr>
-	<tr>
-		<td><spring:message code="user.registration.password" /></td>
-		<td><form:password path="password" /></td>
-		<td><form:errors cssClass="error" path="password" /></td>
-	</tr>
-	<tr>
-		<td><input type="submit" /></td>
-		<td></td>
-		<td></td>
-	</tr>
+<tr>
+<td>Email:</td>
+<td><input type="text" name="j_username" id="j_username"size="30" maxlength="40"  /></td>
+</tr>
+<tr>
+<td>Пароль:</td>
+<td><input type="password" name="j_password" id="j_password" size="30" maxlength="32" /></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value="Войти" /></td>
+</tr>
 </tbody>
 </table>
-</form:form>
+</form>	
 
 </div>
 <div id="footer">
