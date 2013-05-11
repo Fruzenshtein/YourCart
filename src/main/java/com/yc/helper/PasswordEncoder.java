@@ -10,7 +10,7 @@ public class PasswordEncoder {
 
 	public String getHash(String str) {
 
-		String md5password = "";
+		StringBuilder md5password = new StringBuilder();
 		MessageDigest messageDigest;
 
 		try {
@@ -24,9 +24,10 @@ public class PasswordEncoder {
 			for (int i = 0; i < md5.length; i++) {
 				String tmp = (Integer.toHexString(0xFF & md5[i]));
 				if (tmp.length() == 1) {
-					md5password += "0" + tmp;
+					md5password.append("0");
+					md5password.append(tmp);
 				} else {
-					md5password += tmp;
+					md5password.append(tmp);
 				}
 			}
 
@@ -34,7 +35,7 @@ public class PasswordEncoder {
 			e.printStackTrace();
 		}
 
-		return md5password;
+		return md5password.toString();
 
 	}
 }

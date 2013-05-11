@@ -27,10 +27,11 @@
 <h2><spring:message code="page.title.welcome" /></h2>
 <p>
 ${userLogin}, добро пожаловать в личный кабинет<br />
-<a href="<c:url value="/j_spring_security_logout" />" >Выход</a> 
 </p>
 
-
+<ul>
+<li><a href="${pageContext.request.contextPath}/user/details.html">Личная информация</a></li>
+</ul>
 
 </div>
 <div id="footer">

@@ -1,5 +1,6 @@
 package com.yc.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,6 +37,15 @@ public class User {
 	)
 	private Role role;
 	
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+	private UserDetails userDetails;
+	
+	public UserDetails getUserDetails() {
+		return userDetails;
+	}
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
+	}
 	public Role getRole() {
 		return role;
 	}

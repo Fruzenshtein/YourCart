@@ -21,6 +21,7 @@ public class UserDAOImpl implements UserDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
+	@SuppressWarnings("unchecked")
 	public User getUser(String email) {
 		List<User> userList = new ArrayList<User>();
 		Query query = openSession().createQuery("from User u where u.email = :email");

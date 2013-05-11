@@ -13,6 +13,7 @@
 <c:when test="${userLogin != null}">
 	<ul>
 	<li><a href="${pageContext.request.contextPath}/user/account.html">Личный кабинет</a></li>
+	<li><a href="<c:url value="/j_spring_security_logout" />" >Выход</a> </li>
 	</ul>
 </c:when>
 <c:otherwise>
