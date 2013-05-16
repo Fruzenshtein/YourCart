@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yc.model.User;
 import com.yc.model.UserDetails;
@@ -36,7 +37,7 @@ public class UserAccountController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
 	
-	@RequestMapping(value="/user/account")
+	@RequestMapping(value="/user/account", method=RequestMethod.GET)
 	public ModelAndView welcomePage() {
 		return new ModelAndView("user-account/welcome");
 	}
@@ -58,9 +59,12 @@ public class UserAccountController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/user/details", method=RequestMethod.POST)
-	public ModelAndView saveUserDetails(@ModelAttribute UserDetails userDetails) {
-		ModelAndView mav = new ModelAndView("user-account/details");
+	@RequestMapping(value="/user/details", method=RequestMethod.PUT)
+	public ModelAndView saveUserDetails(@ModelAttribute UserDetails userDetails,
+			final RedirectAttributes redirectAttributes) {
+		ModelAndView mav = new ModelAndView("redirect:details.html");
+		
+		String message = "Информация о пользователе успешно изменена.";
 		
 		Integer userId = (Integer) RequestContextHolder.currentRequestAttributes()
 				.getAttribute("userId", RequestAttributes.SCOPE_SESSION);
@@ -73,6 +77,8 @@ public class UserAccountController {
 		user.setUserDetails(ud);
 		
 		userDetailsService.updateUserDetails(ud);
+		
+		redirectAttributes.addFlashAttribute("success_msg", message);
 		
 		return mav;
 	}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yc.model.User;
 import com.yc.service.UserService;
@@ -31,8 +32,9 @@ public class UserRegistrationController {
 	
 	@RequestMapping(value="/registration", method=RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute @Valid User user, 
-			BindingResult result) {
-		ModelAndView modelAndView = new ModelAndView("user-registration/registration-form");
+			BindingResult result,
+			final RedirectAttributes redirectAttributes) {
+		ModelAndView modelAndView = new ModelAndView("redirect:registration.html");
 		
 		if (result.hasErrors())
 			return modelAndView;
@@ -44,13 +46,12 @@ public class UserRegistrationController {
 						
 			userService.addUser(user);
 			
-			modelAndView.addObject("user", user);
 			messages.put("success", "message.user.success.register");
 		} else {
 			messages.put("error", "message.user.invalid.register");
 		}
 		
-		modelAndView.addObject("messages", messages);
+		redirectAttributes.addFlashAttribute("messages", messages);
 		
 		return modelAndView;
 		

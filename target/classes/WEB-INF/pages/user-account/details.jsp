@@ -28,8 +28,8 @@
 			<spring:message code="page.title.details" />
 		</h2>
 		<p>Здесь можно изменить свою личную информацию.</p>
-
-		<form:form method="POST" commandName="userDetails"
+		<p><span class="success">${success_msg}</span></p>
+		<form:form method="PUT" commandName="userDetails"
 			action="${pageContext.request.contextPath}/user/details.html">
 			<table>
 				<tbody>
