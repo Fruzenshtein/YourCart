@@ -4,22 +4,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yc.dao.UserDetailsDAO;
+import com.yc.dao.UserDetailsRepository;
+import com.yc.exception.UserDetailsNotFoundException;
 import com.yc.model.UserDetails;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=UserDetailsNotFoundException.class)
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
-	private UserDetailsDAO userDetailsDAO;
+	private UserDetailsRepository userDetailsRepository;
 
-	public UserDetails getUserDetails(int userId) {
-		return userDetailsDAO.getUserDetails(userId);
+	public UserDetails get(int id) {
+		return userDetailsRepository.findOne(id);
+	}
+	
+	public UserDetails save(UserDetails userDetails) {
+		return userDetailsRepository.save(userDetails);
 	}
 
-	public void updateUserDetails(UserDetails userDetails) {
-		userDetailsDAO.updateUserDetails(userDetails);
+	public UserDetails update(UserDetails userDetails) throws UserDetailsNotFoundException {
+		UserDetails ud = get(userDetails.getId());
+		if (ud == null)
+			throw new UserDetailsNotFoundException();
+		
+		ud.updateUserDetails(userDetails);
+		
+		return ud;
 	}
 
 }

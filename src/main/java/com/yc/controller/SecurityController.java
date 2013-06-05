@@ -34,7 +34,7 @@ public class SecurityController {
 		ModelAndView mav = new ModelAndView("user-account/welcome");
 		String userLogin = SecurityContextHolder.getContext().getAuthentication().getName();
 		
-		User user = userService.getUser(userLogin);
+		User user = userService.get(userLogin);
 		
 		mav.addObject("userLogin", userLogin);
 		mav.addObject("userId", user.getId());

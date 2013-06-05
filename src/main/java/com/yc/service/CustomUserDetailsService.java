@@ -14,19 +14,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yc.dao.UserDAO;
+import com.yc.dao.UserRepository;
 
 @Service
 @Transactional(readOnly=true)
 public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired
-	private UserDAO userDAO;
+	private UserRepository userDAO;
 
 	public UserDetails loadUserByUsername(String email)
 			throws UsernameNotFoundException {
 		
-		com.yc.model.User domainUser = userDAO.getUser(email);
+		com.yc.model.User domainUser = userDAO.findByEmail(email);
 		
 		boolean enabled = true;
 		boolean accountNonExpired = true;

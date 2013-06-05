@@ -1,53 +1,78 @@
 package com.yc.service;
 
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.yc.dao.RoleDAO;
-import com.yc.dao.UserDAO;
+import com.yc.dao.UserRepository;
+import com.yc.exception.UserNotFoundException;
 import com.yc.helper.PasswordEncoder;
 import com.yc.model.Role;
 import com.yc.model.User;
+import com.yc.model.UserDetails;
 
 @Service
-@Transactional
+@Transactional(rollbackFor = UserNotFoundException.class)
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserDAO userDAO;
+	private UserRepository userRepository;
 	
 	@Autowired
-	private RoleDAO roleDAO;
+	private RoleService roleService;
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public User getUser(String email) {
-		return userDAO.getUser(email);
+	public User get(String email) {
+		return userRepository.findByEmail(email);
 	}
 
-	public User getUser(int id) {
-		return userDAO.getUser(id);
+	public User get(int id) {
+		return userRepository.findOne(id);
 	}
 
-	public void addUser(User user) {
-		Role role = roleDAO.getRole(2);
+	public User save(User user) {
+		Role role = roleService.findById(2);
+		UserDetails userDetails = new UserDetails();
+		userDetails.setBirthday(new Date(0));
+		
 		user.setRole(role);
+		user.setUserDetails(userDetails);
+		userDetails.setUser(user);
 		
 		String md5 = passwordEncoder.getHash(user.getPassword());
 		user.setPassword(md5);
 		
-		userDAO.addUser(user);
+		userRepository.save(user);
+		
+		return user;
 	}
 
-	public void deleteUser(int id) {
-		userDAO.deleteUser(id);
+	public User delete(int id) throws UserNotFoundException {
+		User userToDelete = get(id);
+		if (userToDelete == null)
+			throw new UserNotFoundException();
+		userRepository.delete(userToDelete);
+		return userToDelete;
 	}
 
-	public void upadateUser(User user) {
-		userDAO.upadateUser(user);
+	public User update(User user) throws UserNotFoundException {
+		User userToUpdate = get(user.getId());
+		if (userToUpdate == null)
+			throw new UserNotFoundException();
+		
+		userToUpdate.setEmail(user.getEmail());
+		userToUpdate.setPassword(user.getPassword());
+		userToUpdate.setRole(user.getRole());
+		userToUpdate.setUserDetails(user.getUserDetails());
+		
+		return userToUpdate;		
 	}
 
 }

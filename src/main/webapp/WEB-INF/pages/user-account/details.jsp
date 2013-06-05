@@ -51,6 +51,7 @@
 					<tr>
 						<td>День рождения:</td>
 						<td><form:input path="birthday" /></td>
+						<td><form:errors path="birthday" cssClass="error"/></td>
 					</tr>
 					<tr>
 						<td><input type="submit" value="Обновить" /></td>

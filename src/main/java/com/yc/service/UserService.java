@@ -1,13 +1,14 @@
 package com.yc.service;
 
+import com.yc.exception.UserNotFoundException;
 import com.yc.model.User;
 
 public interface UserService {
 
-	public User getUser(String email);
-	public User getUser(int id);
-	public void addUser(User user);
-	public void deleteUser(int id);
-	public void upadateUser(User user);
+	public User get(String email);
+	public User get(int id);
+	public User save(User user);
+	public User delete(int id) throws UserNotFoundException;
+	public User update(User user) throws UserNotFoundException;
 
 }

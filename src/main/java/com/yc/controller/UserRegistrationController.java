@@ -39,12 +39,12 @@ public class UserRegistrationController {
 		if (result.hasErrors())
 			return modelAndView;
 		
-		User tempUser = userService.getUser(user.getEmail());
+		User tempUser = userService.get(user.getEmail());
 		Map<String, String> messages = new HashMap<String, String>();
 		
 		if (tempUser == null) {
 						
-			userService.addUser(user);
+			userService.save(user);
 			
 			messages.put("success", "message.user.success.register");
 		} else {

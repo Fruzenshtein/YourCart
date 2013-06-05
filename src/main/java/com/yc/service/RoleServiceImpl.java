@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.yc.dao.RoleDAO;
+import com.yc.dao.RoleRepository;
 import com.yc.model.Role;
 
 @Service
@@ -12,10 +12,10 @@ import com.yc.model.Role;
 public class RoleServiceImpl implements RoleService {
 	
 	@Autowired
-	private RoleDAO roleDAO;
+	private RoleRepository roleRepository;
 
-	public Role getRole(int id) {
-		return roleDAO.getRole(id);
+	public Role findById(int id) {
+		return roleRepository.findOne(id);
 	}
 
 }

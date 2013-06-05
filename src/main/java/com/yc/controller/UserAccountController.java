@@ -3,9 +3,12 @@ package com.yc.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +19,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yc.exception.UserDetailsNotFoundException;
 import com.yc.model.User;
 import com.yc.model.UserDetails;
 import com.yc.service.UserDetailsService;
@@ -49,7 +53,7 @@ public class UserAccountController {
 		Integer userId = (Integer) RequestContextHolder.currentRequestAttributes()
 				.getAttribute("userId", RequestAttributes.SCOPE_SESSION);
 		
-		UserDetails ud = userDetailsService.getUserDetails(userId);
+		UserDetails ud = userDetailsService.get(userId);
 		
 		if (ud != null)
 			mav.addObject("userDetails", ud);
@@ -60,23 +64,22 @@ public class UserAccountController {
 	}
 	
 	@RequestMapping(value="/user/details", method=RequestMethod.PUT)
-	public ModelAndView saveUserDetails(@ModelAttribute UserDetails userDetails,
-			final RedirectAttributes redirectAttributes) {
+	public ModelAndView saveUserDetails(@ModelAttribute @Valid UserDetails userDetails,
+			BindingResult result,
+			final RedirectAttributes redirectAttributes) throws UserDetailsNotFoundException {
 		ModelAndView mav = new ModelAndView("redirect:details.html");
+		
+		if (result.hasErrors())
+			return new ModelAndView("user-account/details");
 		
 		String message = "Информация о пользователе успешно изменена.";
 		
 		Integer userId = (Integer) RequestContextHolder.currentRequestAttributes()
 				.getAttribute("userId", RequestAttributes.SCOPE_SESSION);
 		
-		User user = userService.getUser(userId);
-		UserDetails ud = user.getUserDetails();
-		ud = ud.updateUserDetails(userDetails);
+		userDetails.setId(userId);
 		
-		ud.setUser(user);
-		user.setUserDetails(ud);
-		
-		userDetailsService.updateUserDetails(ud);
+		userDetailsService.update(userDetails);
 		
 		redirectAttributes.addFlashAttribute("success_msg", message);
 		

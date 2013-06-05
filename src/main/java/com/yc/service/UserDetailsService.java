@@ -1,10 +1,12 @@
 package com.yc.service;
 
+import com.yc.exception.UserDetailsNotFoundException;
 import com.yc.model.UserDetails;
 
 public interface UserDetailsService {
 	
-	public UserDetails getUserDetails(int userId);
-	public void updateUserDetails(UserDetails userDetails);
+	public UserDetails get(int id);
+	public UserDetails save(UserDetails userDetails);
+	public UserDetails update(UserDetails userDetails) throws UserDetailsNotFoundException;
 
 }
