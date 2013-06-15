@@ -6,9 +6,9 @@
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     
-	<http auto-config="true">
-	
-		<intercept-url pattern="/user/*" access="ROLE_USER" />
+    <global-method-security pre-post-annotations="enabled" />
+    
+	<http use-expressions="true" auto-config="true">
 		
 		<form-login login-page="/user-login.html" 
 			default-target-url="/user/login.html"
