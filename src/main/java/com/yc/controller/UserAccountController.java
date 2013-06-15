@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yc.exception.UserDetailsNotFoundException;
-import com.yc.model.User;
 import com.yc.model.UserDetails;
 import com.yc.service.UserDetailsService;
 import com.yc.service.UserService;
