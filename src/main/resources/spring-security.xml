@@ -10,6 +10,8 @@
     
 	<http use-expressions="true" auto-config="true">
 		
+		<intercept-url pattern="/user/*" access="hasRole('ROLE_USER')" />
+		
 		<form-login login-page="/user-login.html" 
 			default-target-url="/user/login.html"
 			authentication-failure-url="/error-login.html" />
