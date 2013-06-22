@@ -22,13 +22,13 @@ public class SecurityUserContext implements UserContext {
 		if (auth == null)
 			return null;
 		
-		String email = auth.getName();
-		return userService.get(email);
+		return (User) auth.getPrincipal();
 	}
 
 	@Override
 	public void setCurrentUser(User user) {
-		// TODO Auto-generated method stub
+		// TODO Part for the immediately signing in after the registration
+		//Spring Security 3.1 page 56
 		
 	}
 
