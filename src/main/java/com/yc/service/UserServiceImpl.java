@@ -3,7 +3,6 @@ package com.yc.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +37,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findOne(id);
 	}
 
-	@PreAuthorize(value="isAnonymous()")
 	public User save(User user) {
 		Role role = roleService.findById(2);
 		UserDetails userDetails = new UserDetails();
@@ -64,7 +62,6 @@ public class UserServiceImpl implements UserService {
 		return userToDelete;
 	}
 
-	@PreAuthorize(value="isAuthenticated()")
 	public User update(User user) throws UserNotFoundException {
 		User userToUpdate = get(user.getId());
 		if (userToUpdate == null)

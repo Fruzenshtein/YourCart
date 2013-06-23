@@ -47,6 +47,10 @@
 <td><input type="password" name="j_password" id="j_password" size="30" maxlength="32" /></td>
 </tr>
 <tr>
+<td>Запомнить пароль?</td>
+<td><input type="checkbox" id="remember" name="_spring_security_remember_me" /></td>
+</tr>
+<tr>
 <td></td>
 <td><input type="submit" value="Войти" /></td>
 </tr>

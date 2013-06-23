@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yc.exception.UserDetailsNotFoundException;
+import com.yc.helper.security.UserContext;
 import com.yc.model.UserDetails;
 import com.yc.service.UserDetailsService;
 import com.yc.service.UserService;
@@ -32,6 +31,9 @@ public class UserAccountController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserContext userContext;
 	
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -49,8 +51,7 @@ public class UserAccountController {
 	public ModelAndView userDetailsPage() {
 		ModelAndView mav = new ModelAndView("user-account/details");
 		
-		Integer userId = (Integer) RequestContextHolder.currentRequestAttributes()
-				.getAttribute("userId", RequestAttributes.SCOPE_SESSION);
+		Integer userId = userContext.getCurrentUser().getId();
 		
 		UserDetails ud = userDetailsService.get(userId);
 		
@@ -73,8 +74,7 @@ public class UserAccountController {
 		
 		String message = "Информация о пользователе успешно изменена.";
 		
-		Integer userId = (Integer) RequestContextHolder.currentRequestAttributes()
-				.getAttribute("userId", RequestAttributes.SCOPE_SESSION);
+		Integer userId = userContext.getCurrentUser().getId();
 		
 		userDetails.setId(userId);
 		

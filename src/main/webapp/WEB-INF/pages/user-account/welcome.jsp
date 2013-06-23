@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -26,7 +27,7 @@
 <div id="content">
 <h2><spring:message code="page.title.welcome" /></h2>
 <p>
-${userLogin}, добро пожаловать в личный кабинет<br />
+<sec:authentication property="name" />, добро пожаловать в личный кабинет<br />
 </p>
 
 <ul>
