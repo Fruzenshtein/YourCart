@@ -16,6 +16,7 @@
 			default-target-url="/user/login.html"
 			authentication-failure-url="/error-login.html" />
 		<logout logout-success-url="/index.html" />
+		<remember-me key="rememberMeYC" />
 		
 	</http>
 	
