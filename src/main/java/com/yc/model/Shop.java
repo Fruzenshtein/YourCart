@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +29,15 @@ public class Shop {
 	)
 	private Set<User> users;
 	
+	@OneToOne(mappedBy="shop", cascade=CascadeType.ALL)
+	private ShopDetails shopDetails;
+	
+	public ShopDetails getShopDetails() {
+		return shopDetails;
+	}
+	public void setShopDetails(ShopDetails shopDetails) {
+		this.shopDetails = shopDetails;
+	}
 	public Integer getId() {
 		return id;
 	}
