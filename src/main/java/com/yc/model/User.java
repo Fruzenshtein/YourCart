@@ -1,11 +1,14 @@
 package com.yc.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
@@ -40,6 +43,19 @@ public class User {
 	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
 	private UserDetails userDetails;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="user_shops",
+		joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
+		inverseJoinColumns = {@JoinColumn(name="shop_id", referencedColumnName="id")}
+	)
+	private Set<Shop> shops;
+	
+	public Set<Shop> getShops() {
+		return shops;
+	}
+	public void setShops(Set<Shop> shops) {
+		this.shops = shops;
+	}
 	public UserDetails getUserDetails() {
 		return userDetails;
 	}
