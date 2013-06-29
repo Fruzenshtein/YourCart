@@ -32,6 +32,17 @@ public class Shop {
 	@OneToOne(mappedBy="shop", cascade=CascadeType.ALL)
 	private ShopDetails shopDetails;
 	
+	/**
+	 * Method updates already existed {@link Shop} object with values from the inputed argument.
+	 * @param newShop - Object which contains new Shop values.
+	 * @return {@link Shop} object to which this method applied.
+	 */
+	public Shop update(Shop newShop) {
+		this.name = newShop.name;
+		this.shopDetails = newShop.shopDetails;
+		return this;
+	}
+	
 	public ShopDetails getShopDetails() {
 		return shopDetails;
 	}

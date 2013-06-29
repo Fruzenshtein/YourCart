@@ -31,6 +31,17 @@ public class ShopDetails {
 	@PrimaryKeyJoinColumn
 	private Shop shop;
 	
+	/**
+	 * Method updates already existed {@link ShopDetails} object with values from the inputed argument.
+	 * @param newDetails - Object which contains new ShopDetails values.
+	 * @return {@link ShopDetails} object to which this method applied.
+	 */
+	public ShopDetails update(ShopDetails newDetails) {
+		this.category = newDetails.category;
+		this.type = newDetails.type;
+		return this;
+	}
+	
 	public Integer getShopId() {
 		return shopId;
 	}
