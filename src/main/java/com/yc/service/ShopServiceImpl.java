@@ -1,12 +1,16 @@
 package com.yc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yc.dao.ShopRepository;
 import com.yc.exception.ShopNotFoundException;
 import com.yc.model.Shop;
 import com.yc.model.ShopDetails;
 
+@Service
+@Transactional(rollbackFor=ShopNotFoundException.class)
 public class ShopServiceImpl implements ShopService {
 	
 	@Autowired
