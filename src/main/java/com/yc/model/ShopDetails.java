@@ -27,9 +27,16 @@ public class ShopDetails {
 	
 	private String type;
 	
+	@Column(name="activated_status")
+	private boolean activatedStatus;
+	
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private Shop shop;
+	
+	public ShopDetails() {
+		this.activatedStatus = false;
+	}
 	
 	/**
 	 * Method updates already existed {@link ShopDetails} object with values from the inputed argument.
@@ -39,9 +46,16 @@ public class ShopDetails {
 	public ShopDetails update(ShopDetails newDetails) {
 		this.category = newDetails.category;
 		this.type = newDetails.type;
+		this.activatedStatus = newDetails.activatedStatus;
 		return this;
 	}
 	
+	public boolean isActivatedStatus() {
+		return activatedStatus;
+	}
+	public void setActivatedStatus(boolean activatedStatus) {
+		this.activatedStatus = activatedStatus;
+	}
 	public Integer getShopId() {
 		return shopId;
 	}

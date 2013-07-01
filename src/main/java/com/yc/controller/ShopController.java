@@ -35,20 +35,8 @@ public class ShopController {
 	public ModelAndView addShop(@ModelAttribute ShopDTO shopDTO,
 			final RedirectAttributes redirectAttributes) throws ShopNotFoundException {
 		ModelAndView mav = new ModelAndView("redirect:add.html");
-		
-		Shop shop = new Shop();
-		shop.setName(shopDTO.getName());
-		
-		ShopDetails details = new ShopDetails();
-		details.setCategory(shopDTO.getCategory());
-		details.setType(shopDTO.getType());
 
-		Shop newShop = shopService.save(shop);
-		
-		ShopDetails detailsToUpdate = newShop.getShopDetails();
-		detailsToUpdate.update(details);
-		
-		shopDetailsService.update(detailsToUpdate);
+		shopService.save(shopDTO);
 		
 		redirectAttributes.addFlashAttribute("success_msg", "Магазин "+
 		shopDTO.getName()+" успешно добавлен.");

@@ -44,18 +44,19 @@ public class User {
 	private UserDetails userDetails;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="user_shops",
+	@JoinTable(name="shop_moders",
 		joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns = {@JoinColumn(name="shop_id", referencedColumnName="id")}
 	)
-	private Set<Shop> shops;
+	private Set<Shop> moderShops;
 	
-	public Set<Shop> getShops() {
-		return shops;
-	}
-	public void setShops(Set<Shop> shops) {
-		this.shops = shops;
-	}
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="shop_owners",
+		joinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")},
+		inverseJoinColumns = {@JoinColumn(name="shop_id", referencedColumnName="id")}
+	)
+	private Set<Shop> userShops;
+	
 	public UserDetails getUserDetails() {
 		return userDetails;
 	}
@@ -86,5 +87,18 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public Set<Shop> getModerShops() {
+		return moderShops;
+	}
+	public void setModerShops(Set<Shop> moderShops) {
+		this.moderShops = moderShops;
+	}
+	public Set<Shop> getUserShops() {
+		return userShops;
+	}
+	public void setUserShops(Set<Shop> userShops) {
+		this.userShops = userShops;
+	}
+	
 
 }

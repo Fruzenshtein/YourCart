@@ -10,10 +10,37 @@ import com.yc.model.ShopDetails;
  */
 public class ShopDTO {
 	
+	//Shop object fields
 	private Integer id;
 	private String name;
+	
+	//ShopDetails object fields
 	private String category;
 	private String type;
+	private boolean activatedStatus;
+	
+	/**
+	 * Method builds {@link Shop} object based on the current {@link ShopDTO} object.
+	 * @return New {@link Shop} object.
+	 */
+	public Shop buildShop() {
+		Shop shop = new Shop();
+		shop.setId(id);
+		shop.setName(name);
+		return shop;
+	}
+	
+	/**
+	 * Method builds {@link ShopDetails} object based on the current {@link ShopDTO} object.
+	 * @return New {@link ShopDetails} object.
+	 */	
+	public ShopDetails buildShopDetails() {
+		ShopDetails details = new ShopDetails();
+		details.setCategory(category);
+		details.setType(type);
+		details.setActivatedStatus(activatedStatus);
+		return details;
+	}
 	
 	public Integer getId() {
 		return id;
@@ -38,6 +65,12 @@ public class ShopDTO {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public boolean isActivatedStatus() {
+		return activatedStatus;
+	}
+	public void setActivatedStatus(boolean activatedStatus) {
+		this.activatedStatus = activatedStatus;
 	}
 
 }
