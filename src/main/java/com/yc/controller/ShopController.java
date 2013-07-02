@@ -1,5 +1,7 @@
 package com.yc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yc.dto.ShopDTO;
 import com.yc.exception.ShopNotFoundException;
 import com.yc.model.Shop;
-import com.yc.model.ShopDetails;
 import com.yc.service.ShopDetailsService;
 import com.yc.service.ShopService;
 
@@ -24,9 +25,14 @@ public class ShopController {
 	@Autowired
 	private ShopDetailsService shopDetailsService;
 	
+	@RequestMapping(value="/shop/landing", method=RequestMethod.GET)
+	public ModelAndView shopLandingPage() {
+		return new ModelAndView("shop/shop-landing");
+	}
+	
 	@RequestMapping(value="/shop/add", method=RequestMethod.GET)
 	public ModelAndView newShopPage() {
-		ModelAndView mav = new ModelAndView("shop/new-shop");
+		ModelAndView mav = new ModelAndView("shop/shop-create");
 		mav.addObject("shopDTO", new ShopDTO());
 		return mav;
 	}
@@ -40,6 +46,14 @@ public class ShopController {
 		
 		redirectAttributes.addFlashAttribute("success_msg", "Магазин "+
 		shopDTO.getName()+" успешно добавлен.");
+		return mav;
+	}
+	
+	@RequestMapping(value="/shop/list/owner", method = RequestMethod.GET)
+	public ModelAndView ownerShopsPage() {
+		ModelAndView mav = new ModelAndView("shop/owner-shops");
+		List<Shop> ownerShops = shopService.findOwnerShops();
+		mav.addObject("ownerShops", ownerShops);
 		return mav;
 	}
 

@@ -32,7 +32,6 @@
 
 <ul>
 <li><a href="${pageContext.request.contextPath}/user/details.html">Личная информация</a></li>
-<li><a href="${pageContext.request.contextPath}/shop/add.html">Создать магазин</a></li>
 </ul>
 
 </div>

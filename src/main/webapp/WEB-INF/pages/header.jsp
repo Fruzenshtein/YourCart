@@ -14,14 +14,15 @@
 <c:choose>
 <c:when test="${authenticated}">
 	<ul>
-	<li><a href="${pageContext.request.contextPath}/user/account.html">Личный кабинет</a></li>
-	<li><a href="<c:url value="/j_spring_security_logout" />" >Выход</a> </li>
+	<li><a href="${pageContext.request.contextPath}/user/account.html"><spring:message code="header.account" /></a></li>
+	<li><a href="${pageContext.request.contextPath}/shop/landing.html"><spring:message code="header.shops" /></a></li>
+	<li><a href="<c:url value="/j_spring_security_logout" />" ><spring:message code="header.logout" /></a> </li>
 	</ul>
 </c:when>
 <c:otherwise>
 	<ul>
-	<li><a href="${pageContext.request.contextPath}/user-login.html">Вход в систему</a></li>
-	<li><a href="${pageContext.request.contextPath}/registration.html">Регистрация</a></li>
+	<li><a href="${pageContext.request.contextPath}/user-login.html"><spring:message code="header.login" /></a></li>
+	<li><a href="${pageContext.request.contextPath}/registration.html"><spring:message code="header.registration" /></a></li>
 	</ul>
 </c:otherwise>
 </c:choose>

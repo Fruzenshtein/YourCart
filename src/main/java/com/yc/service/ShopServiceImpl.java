@@ -1,6 +1,6 @@
 package com.yc.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,10 +65,22 @@ public class ShopServiceImpl implements ShopService {
 		if (shopToUpdate == null)
 			throw new ShopNotFoundException();
 		
-		//TODO: Update logic need to be implemented
-		//shopToUpdate.update(shop);
+		Shop shop = shopDTO.buildShop();
+		ShopDetails shopDetails = shopDTO.buildShopDetails();
+		
+		
 		
 		return shopToUpdate;
+	}
+
+	@Override
+	public List<Shop> findOwnerShops() {
+		List<Shop> shopList = null;
+		int ownerId = userContext.getCurrentUser().getId();
+		
+		shopList = shopRepository.findShopsByOwner(ownerId);
+		
+		return shopList;
 	}
 
 }
