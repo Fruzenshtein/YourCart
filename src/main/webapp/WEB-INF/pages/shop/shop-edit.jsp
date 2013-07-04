@@ -12,7 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="../resources/css/main.css" rel="stylesheet" type="text/css" />
+<link href="../../resources/css/main.css" rel="stylesheet" type="text/css" />
 <title><spring:message code="page.title.shop.edit" /></title>
 </head>
 <body>
@@ -27,9 +27,9 @@
 		<h2>
 			<spring:message code="page.title.shop.edit" />
 		</h2>
-		<p>Здесь можно зарегистрировать Ваш магазин.</p>
+		<p>Здесь можно внести изменения в ваш магазин.</p>
 		<p><span class="success">${success_msg}</span></p>
-		<form:form method="POST" commandName="shopDTO"
+		<form:form method="PUT" commandName="shopDTO"
 			action="${pageContext.request.contextPath}/shop/edit.html">
 			<table>
 				<form:hidden path="id" />
@@ -58,7 +58,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><input type="submit" value="Создать" /></td>
+						<td><input type="submit" value="Редактировать" /></td>
 						<td></td>
 					</tr>
 				</tbody>

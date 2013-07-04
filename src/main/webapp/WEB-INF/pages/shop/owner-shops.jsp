@@ -27,6 +27,7 @@
 <div id="content">
 <h2><spring:message code="page.title.owner.shops" /></h2>
 <p>
+<span class="success">${success_msg}</span>
 Список магазинов, которые принадлежат вам:
 </p>
 <div class="shops">
@@ -43,7 +44,7 @@
 	<td>${shop.name}</td>
 	<td>${shop.shopDetails.activatedStatus}</td>
 	<td>
-	<a href="#">Редактировать</a><br/>
+	<a href="${pageContext.request.contextPath}/shop/edit/${shop.id}.html">Редактировать</a><br/>
 	<a href="#">Удалить</a><br/>
 	</td>
 	</tr>

@@ -13,6 +13,7 @@ public class ShopDTO {
 	//Shop object fields
 	private Integer id;
 	private String name;
+	private Integer ownerId;
 	
 	//ShopDetails object fields
 	private String category;
@@ -40,6 +41,24 @@ public class ShopDTO {
 		details.setType(type);
 		details.setActivatedStatus(activatedStatus);
 		return details;
+	}
+	
+	/**
+	 * Method builds {@link ShopDTO} object based on {@link Shop} and {@link ShopDetails} objects.
+	 * @param shop - {@link Shop} object
+	 * @param details - {@link ShopDetails} object
+	 * @return {@link ShopDTO} object to which this method applies.
+	 */
+	public ShopDTO buildShopDTO(Shop shop, ShopDetails details) {
+		this.id = shop.getId();
+		this.name = shop.getName();
+		this.ownerId = shop.getShopOwner().getId();
+		
+		this.category = details.getCategory();
+		this.type = details.getType();
+		this.activatedStatus = details.isActivatedStatus();
+		
+		return this;
 	}
 	
 	public Integer getId() {
@@ -71,6 +90,12 @@ public class ShopDTO {
 	}
 	public void setActivatedStatus(boolean activatedStatus) {
 		this.activatedStatus = activatedStatus;
+	}
+	public Integer getOwnerId() {
+		return ownerId;
+	}
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
 	}
 
 }

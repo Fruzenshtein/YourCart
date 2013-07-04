@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import com.yc.dto.ShopDTO;
+
 @Entity
 @Table(name="shop_details")
 public class ShopDetails {
@@ -47,6 +49,19 @@ public class ShopDetails {
 		this.category = newDetails.category;
 		this.type = newDetails.type;
 		this.activatedStatus = newDetails.activatedStatus;
+		return this;
+	}
+	
+	/**
+	 * Method builds {@link ShopDetails} object based on {@link ShopDTO} object via setting
+	 * values of ShopDTO's fields to ShopDetails fields.
+	 * @param shopDTO - {@link ShopDTO} object
+	 * @return {@link ShopDetails} object to which this method applies.
+	 */
+	public ShopDetails buildFromShopDTO(ShopDTO shopDTO) {
+		this.category = shopDTO.getCategory();
+		this.type = shopDTO.getType();
+		this.activatedStatus = shopDTO.isActivatedStatus();
 		return this;
 	}
 	

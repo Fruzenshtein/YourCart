@@ -9,13 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yc.dao.ShopRepository;
 import com.yc.dto.ShopDTO;
 import com.yc.exception.ShopNotFoundException;
+import com.yc.exception.UserNotFoundException;
 import com.yc.helper.security.UserContext;
 import com.yc.model.Shop;
 import com.yc.model.ShopDetails;
 import com.yc.model.User;
 
 @Service
-@Transactional(rollbackFor=ShopNotFoundException.class)
+@Transactional(rollbackFor= {ShopNotFoundException.class, UserNotFoundException.class})
 public class ShopServiceImpl implements ShopService {
 	
 	@Autowired
@@ -65,11 +66,8 @@ public class ShopServiceImpl implements ShopService {
 		if (shopToUpdate == null)
 			throw new ShopNotFoundException();
 		
-		Shop shop = shopDTO.buildShop();
-		ShopDetails shopDetails = shopDTO.buildShopDetails();
-		
-		
-		
+		shopToUpdate.buildShopFromDTO(shopDTO);	
+	
 		return shopToUpdate;
 	}
 

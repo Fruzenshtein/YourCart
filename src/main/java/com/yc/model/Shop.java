@@ -44,7 +44,7 @@ public class Shop {
 	/**
 	 * Method updates already existed {@link Shop} object with values from the inputed argument.
 	 * @param newShop - Object which contains new Shop values.
-	 * @return {@link Shop} object to which this method applied.
+	 * @return {@link Shop} object to which this method applies.
 	 */
 	public Shop update(Shop newShop) {
 		this.name = newShop.name;
@@ -54,8 +54,16 @@ public class Shop {
 		return this;
 	}
 	
+	/**
+	 * Method builds {@link Shop} object based on {@link ShopDTO} object via setting
+	 * values of ShopDTO's fields to Shop's fields. 
+	 * The method uses one of methods from {@link ShopDetails}.
+	 * @param shopDTO - {@link ShopDTO} object
+	 * @return {@link Shop} object to which this method applies.
+	 */
 	public Shop buildShopFromDTO(ShopDTO shopDTO) {
-		//TODO
+		this.name = shopDTO.getName();
+		this.shopDetails.buildFromShopDTO(shopDTO);
 		return this;
 	}
 	
