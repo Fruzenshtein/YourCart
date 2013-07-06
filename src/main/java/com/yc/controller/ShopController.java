@@ -34,33 +34,40 @@ public class ShopController {
 	
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public ModelAndView newShopPage() {
+		
 		ModelAndView mav = new ModelAndView("shop/shop-create");
 		mav.addObject("shopDTO", new ShopDTO());
 		return mav;
+		
 	}
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public ModelAndView addShop(@ModelAttribute ShopDTO shopDTO,
 			final RedirectAttributes redirectAttributes) throws ShopNotFoundException {
-		ModelAndView mav = new ModelAndView("redirect:add.html");
+		
+		ModelAndView mav = new ModelAndView("redirect:/shop/list/owner.html");
 
 		shopService.save(shopDTO);
-		
 		redirectAttributes.addFlashAttribute("success_msg", "Магазин "+
 		shopDTO.getName()+" успешно добавлен.");
+		
 		return mav;
 	}
 	
 	@RequestMapping(value="/list/owner", method = RequestMethod.GET)
 	public ModelAndView ownerShopsPage() {
+		
 		ModelAndView mav = new ModelAndView("shop/owner-shops");
+		
 		List<Shop> ownerShops = shopService.findOwnerShops();
 		mav.addObject("ownerShops", ownerShops);
+		
 		return mav;
 	}
 	
 	@RequestMapping(value="/edit/{shopId}", method = RequestMethod.GET)
 	public ModelAndView editShopPage(@PathVariable int shopId) {
+		
 		ModelAndView mav = new ModelAndView("shop/shop-edit");
 		
 		Shop shop = shopService.get(shopId);
@@ -75,9 +82,22 @@ public class ShopController {
 	@RequestMapping(value="/edit", method = RequestMethod.PUT)
 	public ModelAndView editShop(@ModelAttribute ShopDTO shopDTO,
 			final RedirectAttributes redirectAttributes) throws ShopNotFoundException {
+		
 		ModelAndView mav = new ModelAndView("redirect:/shop/list/owner.html");
 		shopService.update(shopDTO);
 		redirectAttributes.addFlashAttribute("success_msg", "Магазин успешно обновлен");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/delete/{shopId}", method = RequestMethod.GET)
+	public ModelAndView deleteShop(@PathVariable int shopId,
+			final RedirectAttributes redirectAttributes) throws ShopNotFoundException {
+		
+		ModelAndView mav = new ModelAndView("redirect:/shop/list/owner.html");
+		shopService.delete(shopId);
+		redirectAttributes.addFlashAttribute("success_msg", "Магазин успешно удален");
+		
 		return mav;
 	}
 

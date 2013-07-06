@@ -51,9 +51,9 @@
 					<tr>
 						<td>Тип:</td>
 						<td>
-							Интернет <form:radiobutton path="type" value="internet" />
-							Реальный <form:radiobutton path="type" value="real" />
-							Комбо <form:radiobutton path="type" value="real_internet" />
+							<form:radiobutton path="type" value="internet" />Интернет<br/>
+							<form:radiobutton path="type" value="real" />Реальный<br/>
+							<form:radiobutton path="type" value="real_internet" />Комбо<br/>
 						</td>
 					</tr>
 					<tr>

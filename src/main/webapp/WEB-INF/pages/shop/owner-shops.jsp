@@ -27,25 +27,25 @@
 <div id="content">
 <h2><spring:message code="page.title.owner.shops" /></h2>
 <p>
-<span class="success">${success_msg}</span>
+<span class="success">${success_msg}</span><br/>
 Список магазинов, которые принадлежат вам:
 </p>
 <div class="shops">
-	<table>
+	<table class="list">
 	<thead>
 	<tr>
 	<th>№</th><th>Название</th><th>Статус</th><th>Действия</th>
 	</tr>
 	</thead>
 	<tbody>
-	<c:forEach var="shop" items="${ownerShops}">
+	<c:forEach begin="0" varStatus="loop" var="shop" items="${ownerShops}">
 	<tr>
-	<td>${loop.index}</td>
+	<td>${loop.index + 1}</td>
 	<td>${shop.name}</td>
-	<td>${shop.shopDetails.activatedStatus}</td>
+	<td><spring:message code="shop.is.activated.${shop.shopDetails.activatedStatus}" /></td>
 	<td>
 	<a href="${pageContext.request.contextPath}/shop/edit/${shop.id}.html">Редактировать</a><br/>
-	<a href="#">Удалить</a><br/>
+	<a href="${pageContext.request.contextPath}/shop/delete/${shop.id}.html">Удалить</a><br/>
 	</td>
 	</tr>
 	</c:forEach>

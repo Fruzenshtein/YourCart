@@ -24,7 +24,7 @@ public class Shop {
 	
 	private String name;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.DETACH)
 	@JoinTable(name="shop_moders",
 		joinColumns = {@JoinColumn(name="shop_id", referencedColumnName="id")},
 		inverseJoinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")}
@@ -34,7 +34,7 @@ public class Shop {
 	@OneToOne(mappedBy="shop", cascade=CascadeType.ALL)
 	private ShopDetails shopDetails;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.DETACH)
 	@JoinTable(name="shop_owners",
 		joinColumns = {@JoinColumn(name="shop_id", referencedColumnName="id")},
 		inverseJoinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")}
