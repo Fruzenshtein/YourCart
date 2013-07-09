@@ -34,26 +34,26 @@ public class UserRegistrationController {
 	public ModelAndView registerUser(@ModelAttribute @Valid User user, 
 			BindingResult result,
 			final RedirectAttributes redirectAttributes) {
-		ModelAndView modelAndView = new ModelAndView("redirect:registration.html");
-		
-		if (result.hasErrors())
-			return modelAndView;
+		ModelAndView mav = new ModelAndView("user-registration/registration-form");
 		
 		User tempUser = userService.get(user.getEmail());
 		Map<String, String> messages = new HashMap<String, String>();
 		
-		if (tempUser == null) {
+		boolean isUserExist = tempUser == null;
+	
+		if (isUserExist && !result.hasErrors()) {
 						
 			userService.save(user);
 			
 			messages.put("success", "message.user.success.register");
+			redirectAttributes.addFlashAttribute("messages", messages);
+			mav.setViewName("redirect:registration.html");
 		} else {
 			messages.put("error", "message.user.invalid.register");
+			mav.addObject("messages", messages);
 		}
-		
-		redirectAttributes.addFlashAttribute("messages", messages);
-		
-		return modelAndView;
+				
+		return mav;
 		
 	}
 
