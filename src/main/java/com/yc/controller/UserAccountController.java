@@ -21,16 +21,12 @@ import com.yc.exception.UserDetailsNotFoundException;
 import com.yc.helper.security.UserContext;
 import com.yc.model.UserDetails;
 import com.yc.service.UserDetailsService;
-import com.yc.service.UserService;
 
 @Controller
 public class UserAccountController {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
-	@Autowired
-	private UserService userService;
 	
 	@Autowired
 	private UserContext userContext;

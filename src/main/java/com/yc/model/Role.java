@@ -28,26 +28,11 @@ public class Role {
 	)
 	private Set<User> userRoles;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="role_permissions",
-		joinColumns = {@JoinColumn(name="role_id", referencedColumnName="id")},
-		inverseJoinColumns = {@JoinColumn(name="permission_id", referencedColumnName="id")}
-	)
-	private Set<Permission> permissions;
-	
 	public Role() { };
 	
 	public Role(int id, String role) {
 		this.id = id;
 		this.role = role;
-	}
-	
-	public Set<Permission> getPermissions() {
-		return permissions;
-	}
-
-	public void setPermissions(Set<Permission> permissions) {
-		this.permissions = permissions;
 	}
 
 	public Role(String role) {
