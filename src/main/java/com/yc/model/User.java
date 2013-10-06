@@ -57,6 +57,17 @@ public class User {
 	)
 	private Set<Shop> userShops;
 	
+	/**
+	 * Method updates main user's fields
+	 * @param user
+	 */
+	public void update(User user) {
+		this.setEmail(user.getEmail());
+		this.setPassword(user.getPassword());
+		this.setRole(user.getRole());
+		this.setUserDetails(user.getUserDetails());
+	}
+	
 	public UserDetails getUserDetails() {
 		return userDetails;
 	}
@@ -100,5 +111,4 @@ public class User {
 		this.userShops = userShops;
 	}
 	
-
 }

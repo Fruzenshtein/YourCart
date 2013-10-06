@@ -67,10 +67,7 @@ public class UserServiceImpl implements UserService {
 		if (userToUpdate == null)
 			throw new UserNotFoundException();
 		
-		userToUpdate.setEmail(user.getEmail());
-		userToUpdate.setPassword(user.getPassword());
-		userToUpdate.setRole(user.getRole());
-		userToUpdate.setUserDetails(user.getUserDetails());
+		userToUpdate.update(user);
 		
 		return userToUpdate;		
 	}
