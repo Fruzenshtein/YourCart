@@ -1,0 +1,91 @@
+CREATE TABLE `roles` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `role` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+1 admin
+2 user
+
+=========================================
+CREATE TABLE `shop_details` (
+  `shop_id` int(6) NOT NULL,
+  `category` varchar(160) DEFAULT NULL,
+  `type` varchar(60) DEFAULT NULL COMMENT 'Service or Goods',
+  `activated_status` tinyint(4) DEFAULT '0',
+  KEY `shop_details_id` (`shop_id`),
+  CONSTRAINT `shop_details_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+=========================================
+CREATE TABLE `shop_moders` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `user_id` int(6) NOT NULL,
+  `shop_id` int(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `moders_to_shops` (`user_id`),
+  KEY `shop_to_moders` (`shop_id`),
+  CONSTRAINT `moders_to_shops` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `shop_to_moders` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+=========================================
+CREATE TABLE `shop_owners` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `shop_id` int(6) NOT NULL,
+  `user_id` int(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `owner_to_shops` (`user_id`),
+  KEY `shop_to_owner` (`shop_id`),
+  CONSTRAINT `owner_to_shops` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `shop_to_owner` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+=========================================
+CREATE TABLE `shops` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `name` varchar(160) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+=========================================
+CREATE TABLE `user_details` (
+  `id` int(6) NOT NULL,
+  `first_name` varchar(30) DEFAULT NULL,
+  `last_name` varchar(40) DEFAULT NULL,
+  `sex` varchar(10) DEFAULT NULL,
+  `birthday` date NOT NULL,
+  `avatar` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `user_details_is` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='User details table';
+=========================================
+CREATE TABLE `user_roles` (
+  `user_id` int(6) NOT NULL,
+  `role_id` int(6) NOT NULL,
+  KEY `role_user` (`role_id`),
+  KEY `user_role` (`user_id`),
+  CONSTRAINT `role_user` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_role` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+=========================================
+CREATE TABLE `userconnection` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(255) NOT NULL,
+  `providerId` varchar(255) NOT NULL,
+  `providerUserId` varchar(255) NOT NULL DEFAULT '',
+  `rank` int(11) NOT NULL,
+  `displayName` varchar(255) DEFAULT NULL,
+  `profileUrl` varchar(512) DEFAULT NULL,
+  `imageUrl` varchar(512) DEFAULT NULL,
+  `accessToken` varchar(255) NOT NULL,
+  `secret` varchar(255) DEFAULT NULL,
+  `refreshToken` varchar(255) DEFAULT NULL,
+  `expireTime` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`,`userId`,`providerId`,`providerUserId`),
+  UNIQUE KEY `UserConnectionRank` (`userId`,`providerId`,`rank`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+=========================================
+CREATE TABLE `users` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `email` varchar(40) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+=========================================
