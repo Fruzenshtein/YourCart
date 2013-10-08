@@ -62,15 +62,23 @@ public class User {
 	)
 	private Set<Shop> userShops;
 	
+	public User() {};
+	
+	public User(String login, String email, String password) {
+		this.login = login;
+		this.email = email;
+		this.password = password;
+	}
+	
 	/**
-	 * Method updates all user's fields
-	 * @param user
+	 * Method applies to {@link User} object. It updates login, 
+	 * email, password and {@link UserDetails} fields
+	 * @param user - {@link User} object contains new values
 	 */
 	public void update(User user) {
 		this.setEmail(user.getEmail());
 		this.setLogin(user.getLogin());
 		this.setPassword(user.getPassword());
-		this.setRole(user.getRole());
 		this.setUserDetails(user.getUserDetails());
 	}
 	

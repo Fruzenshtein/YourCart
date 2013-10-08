@@ -39,9 +39,9 @@ public class UserDetails {
 	@PrimaryKeyJoinColumn
 	private User user;
 	
-	public UserDetails(User user, String firstName, String lastName, String sex, 
+	public UserDetails(int id, String firstName, String lastName, String sex, 
 			Date birthday, String avatar) {
-		this.id = user.getId();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.sex = sex;
