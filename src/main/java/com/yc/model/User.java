@@ -25,6 +25,11 @@ public class User {
 	private Integer id;
 	
 	@NotEmpty
+	@Size(max=30)
+	@Pattern(regexp="^[0-9a-zA-Z-_]+$")
+	private String login;
+	
+	@NotEmpty
 	@Size(min=6, max=40)
 	@Pattern(regexp="^[\\w\\.]+@[\\w]+\\.[a-z]{2,4}$")
 	private String email;
@@ -58,11 +63,12 @@ public class User {
 	private Set<Shop> userShops;
 	
 	/**
-	 * Method updates main user's fields
+	 * Method updates all user's fields
 	 * @param user
 	 */
 	public void update(User user) {
 		this.setEmail(user.getEmail());
+		this.setLogin(user.getLogin());
 		this.setPassword(user.getPassword());
 		this.setRole(user.getRole());
 		this.setUserDetails(user.getUserDetails());
@@ -110,5 +116,12 @@ public class User {
 	public void setUserShops(Set<Shop> userShops) {
 		this.userShops = userShops;
 	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
 	
 }

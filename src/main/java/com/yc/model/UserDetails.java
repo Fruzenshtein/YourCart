@@ -38,6 +38,16 @@ public class UserDetails {
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private User user;
+	
+	public UserDetails(User user, String firstName, String lastName, String sex, 
+			Date birthday, String avatar) {
+		this.id = user.getId();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.avatar = avatar;
+	}
 
 	public UserDetails() {
 	};

@@ -52,7 +52,7 @@ public class UserRegistrationController {
 			messages.put("error", "message.user.invalid.register");
 			mav.addObject("messages", messages);
 		}
-				
+		
 		return mav;
 		
 	}
